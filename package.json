@@ -26,6 +26,7 @@
     "@types/node": "^22.7.5",
     "@vitejs/plugin-vue": "^5.1.4",
     "@vue/test-utils": "^2.4.6",
+    "jsdom": "^25.0.1",
     "json": "^11.0.0",
     "prettier": "^3.3.3",
     "shx": "^0.3.4",

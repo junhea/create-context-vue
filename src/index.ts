@@ -22,6 +22,7 @@ interface SyncContextProviderProps<Context> {
 
 // use props, context is ToRef (readOnly)
 export function createContext<Context = any>(defaultValue: Context extends Ref ? never : Context) {
+  const defaultRef = toRef(defaultValue) as Readonly<ToRef<Context>>
   const symbol: InjectionKey<ToRef<Context>> = Symbol()
   const Provider = defineComponent({
     props: {
@@ -37,7 +38,7 @@ export function createContext<Context = any>(defaultValue: Context extends Ref ?
     },
   })
 
-  const use = () => inject(symbol, toRef(defaultValue) as ToRef<Context>)
+  const use = () => inject(symbol, defaultRef)
 
   return {
     Provider,
@@ -49,6 +50,7 @@ export function createContext<Context = any>(defaultValue: Context extends Ref ?
 export function createSyncContext<Context = any>(
   defaultValue: Context extends Ref ? never : Context,
 ) {
+  const defaultRef = toRef(defaultValue) as ModelRef<Context>
   const symbol: InjectionKey<ModelRef<Context>> = Symbol()
   const Provider = defineComponent({
     props: {
@@ -65,7 +67,7 @@ export function createSyncContext<Context = any>(
     },
   })
 
-  const use = () => inject(symbol, toRef(defaultValue) as ModelRef<Context>)
+  const use = () => inject(symbol, defaultRef)
 
   return {
     Provider,
